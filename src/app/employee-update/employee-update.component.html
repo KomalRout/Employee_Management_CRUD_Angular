@@ -1,0 +1,96 @@
+<h3>Edit Employee Details</h3>
+<div *ngIf="emp">
+  <div><span>ID: </span>{{ emp.id }}</div>
+  <form class="form-group">
+    <div class="form-group">
+      <label for="emp-name">Name: </label>
+      <input
+        id="emp-name"
+        [(ngModel)]="emp.name"
+        type="text"
+        [ngModelOptions]="{ standalone: true }"
+        #name="ngModel"
+        required
+        minlength="3"
+        pattern="^[a-zA-Z ]+$"
+        class="form-control"
+      />
+      <div
+        class="form-control-feedback"
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+        class="alert"
+      >
+        <p *ngIf="name.errors?.['required']">Name is required.</p>
+        <p *ngIf="name.errors?.['minlength']">
+          Name must be at least 3 characters long.
+        </p>
+        <p *ngIf="name.errors?.['pattern']">Name should be in alphabets.</p>
+      </div>
+    </div>
+
+    <label for="emp-location">Location: </label>
+    <input
+      type="text"
+      id="emp-location"
+      [(ngModel)]="emp.location"
+      [ngModelOptions]="{ standalone: true }"
+      required
+      minlength="3"
+      pattern="^[a-zA-Z ]+$"
+      class="form-control"
+      #location="ngModel"
+    />
+    <div
+      *ngIf="location.invalid && (location.dirty || location.touched)"
+      class="alert"
+    >
+      <p *ngIf="location.errors?.['required']">Location is required.</p>
+      <p *ngIf="location.errors?.['minlength']">
+        Location must be at least 3 characters long.
+      </p>
+      <p *ngIf="location.errors?.['pattern']">
+        Location should be in alphabets
+      </p>
+    </div>
+    <label for="emp-email">Email: </label>
+    <input
+      id="emp-email"
+      [(ngModel)]="emp.email"
+      [ngModelOptions]="{ standalone: true }"
+      class="form-control"
+      required
+      #email="ngModel"
+      pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+    />
+    <div
+      *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)"
+      class="alert"
+    >
+      <p *ngIf="email.errors?.['required']">Email is required.</p>
+      <p *ngIf="email.errors?.['pattern']">Email should be in email format</p>
+    </div>
+
+    <label for="emp-phone">Mobile: </label>
+    <input
+      id="emp-phone"
+      [(ngModel)]="emp.phone"
+      [ngModelOptions]="{ standalone: true }"
+      required
+      minlength="3"
+      pattern="^[0-9]"
+      class="form-control"
+      #mobile="ngModel"
+    />
+    <div
+      *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)"
+      class="alert"
+    >
+      <p *ngIf="mobile.errors?.['required']">Mobile is required.</p>
+      <p *ngIf="mobile.errors?.['minlength']">
+        Mobile should contain 10 numbers.
+      </p>
+      <p *ngIf="mobile.errors?.['pattern']">Mobile should be in numbers only</p>
+    </div>
+  </form>
+  <button type="button" (click)="save()">Update</button>
+</div>

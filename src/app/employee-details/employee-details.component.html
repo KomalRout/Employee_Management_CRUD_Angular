@@ -1,0 +1,9 @@
+<div *ngIf="employee" class="employee">
+  <div><span>id: </span>{{ employee.id }}</div>
+  <div><span>Name: </span>{{ employee.name }}</div>
+  <div><span>Location: </span>{{ employee.location }}</div>
+  <div><span> Email: </span>{{ employee.email }}</div>
+  <div><span>Mobile: </span>{{ employee.phone }}</div>
+
+  <button type="button" (click)="goBack()">Back</button>
+</div>

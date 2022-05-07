@@ -1,0 +1,45 @@
+<div>
+  <label for="filter">Filter By: </label>
+  <input id="filter" type="text" [(ngModel)]="searchValue" />
+  <p>
+    Number of employees: {{ (employee | employeeFilter: searchValue).length }}
+  </p>
+</div>
+<div>
+  <table
+    class="table"
+    *ngIf="(employee | employeeFilter: searchValue).length != 0; else nodata"
+  >
+    <thead>
+      <tr>
+        <th>Emp ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employee | employeeFilter: searchValue">
+        <td>
+          <a routerLink="/empDetail/{{ emp.id }}">{{ emp.id }}</a>
+        </td>
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.location }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.phone }}</td>
+        <td>
+          <a routerLink="/empEdit/{{ emp.id }}"><button>Edit</button></a>
+        </td>
+        <td>
+          <button (click)="delete(emp)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #nodata>
+  No result found! scearch again with other name</ng-template
+>

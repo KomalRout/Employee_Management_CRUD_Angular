@@ -1,0 +1,134 @@
+<h3>Add Employee</h3>
+<div id="myForm">
+  <form class="form-group" [formGroup]="employeeForm">
+    <!--Name-->
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-danger': emp_name.invalid && (emp_name.dirty || emp_name.touched),
+        'has-success': emp_name.valid && (emp_name.dirty || emp_name.touched)
+      }"
+    >
+      <label for="name">Name</label>
+      <input
+        #empName
+        type="text"
+        id="name"
+        class="form-control"
+        formControlName="emp_name"
+        required
+      />
+      <div
+        class="form-control-feedback"
+        *ngIf="emp_name.errors && (emp_name.dirty || emp_name.touched)"
+      >
+        <p *ngIf="emp_name.errors.required">Name is required</p>
+        <p *ngIf="emp_name.errors.minlength">
+          Name must be atleat 3 characters long characters
+        </p>
+        <p *ngIf="emp_name.errors.pattern">Name should be in alphabets only.</p>
+      </div>
+    </div>
+    <!--Location-->
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-danger':
+          emp_location.invalid && (emp_location.dirty || emp_location.touched),
+        'has-success':
+          emp_location.valid && (emp_location.dirty || emp_location.touched)
+      }"
+    >
+      <label for="location">Location: </label>
+      <input
+        id="location"
+        #empLocation
+        class="form-control"
+        formControlName="emp_location"
+        required
+      />
+      <div
+        class="form-control-feedback"
+        *ngIf="
+          emp_location.errors && (emp_location.dirty || emp_location.touched)
+        "
+      >
+        <p *ngIf="emp_location.errors.required">Location is required</p>
+        <p *ngIf="emp_location.errors.minlength">
+          Location must be atleat 3 characters long characters
+        </p>
+        <p *ngIf="emp_location.errors.pattern">
+          Location should be in alphabets only
+        </p>
+      </div>
+    </div>
+    <!--Email-->
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-danger':
+          emp_email.invalid && (emp_email.dirty || emp_email.touched),
+        'has-success': emp_email.valid && (emp_email.dirty || emp_name.touched)
+      }"
+    >
+      <label for="email">Email: </label>
+      <input
+        id="email"
+        #empEmail
+        class="form-control"
+        formControlName="emp_email"
+        required
+      />
+      <div
+        class="form-control-feedback"
+        *ngIf="emp_email.errors && (emp_email.dirty || emp_email.touched)"
+      >
+        <p *ngIf="emp_email.errors.required">Email is required</p>
+        <p *ngIf="emp_email.errors.email">Email should be in email format</p>
+      </div>
+    </div>
+    <!--Mobile-->
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-danger':
+          emp_mobile.invalid && (emp_mobile.dirty || emp_mobile.touched),
+        'has-success': emp_name.valid && (emp_mobile.dirty || emp_name.touched)
+      }"
+    >
+      <label for="phone">Mobile: </label>
+      <input
+        id="phone"
+        #empPhone
+        class="form-control"
+        formControlName="emp_mobile"
+        required
+        type="tel"
+      />
+      <div
+        class="form-control-feedback"
+        *ngIf="emp_mobile.errors && (emp_mobile.dirty || emp_mobile.touched)"
+      >
+        <p *ngIf="emp_mobile.errors.required">Mobile number is required</p>
+        <p *ngIf="emp_mobile.errors.minlength">
+          Mobile number shoud be 10 characters long characters
+        </p>
+      </div>
+    </div>
+  </form>
+
+  <button
+    [disabled]="employeeForm.invalid"
+    type="button"
+    class="add-button"
+    (click)="
+      add(empName.value, empEmail.value, empPhone.value, empLocation.value);
+      empName.value = '';
+      empEmail.value = '';
+      empPhone.value = '';
+      empLocation.value = ''
+    "
+  >
+    Submit
+  </button>
+</div>
